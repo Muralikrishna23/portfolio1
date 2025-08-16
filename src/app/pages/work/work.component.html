@@ -1,0 +1,273 @@
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-content fade-in-up">
+      <h1 class="hero-title">
+        My <span class="text-primary">Work</span>
+      </h1>
+      <p class="hero-subtitle">
+        Showcasing projects that blend innovation with practical solutions
+      </p>
+      
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card" data-animate="slide-up" data-delay="100">
+          <div class="stat-number">{{ stats.totalProjects }}+</div>
+          <div class="stat-label">Total Projects</div>
+        </div>
+        <div class="stat-card" data-animate="slide-up" data-delay="200">
+          <div class="stat-number">{{ stats.webProjects }}+</div>
+          <div class="stat-label">Web Applications</div>
+        </div>
+        <div class="stat-card" data-animate="slide-up" data-delay="300">
+          <div class="stat-number">{{ stats.iotProjects }}+</div>
+          <div class="stat-label">IoT Solutions</div>
+        </div>
+        <div class="stat-card" data-animate="slide-up" data-delay="400">
+          <div class="stat-number">{{ stats.technologies }}+</div>
+          <div class="stat-label">Technologies Used</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Current Work Section -->
+<section class="current-work-section">
+  <div class="container">
+    <div class="current-work-card fade-in-up">
+      <div class="work-badge">
+        <div class="status-indicator"></div>
+        Currently Working
+      </div>
+      <h2>Software Developer at Samtex Solutions</h2>
+      <p class="work-description">
+        Developing cutting-edge web applications and IoT device monitoring systems. 
+        Specializing in Spring Boot, Java, and Python technologies for real-time 
+        data visualization and device management solutions.
+      </p>
+      <div class="work-technologies">
+        <span class="tech-tag">Spring Boot</span>
+        <span class="tech-tag">Java</span>
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">IoT Monitoring</span>
+        <span class="tech-tag">Data Visualization</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Filter Section -->
+<section class="filter-section">
+  <div class="container">
+    <div class="filter-controls fade-in-up">
+      <!-- Search Bar -->
+      <div class="search-container">
+        <input 
+          type="text" 
+          [(ngModel)]="searchTerm" 
+          (input)="onSearchChange()"
+          placeholder="Search projects..."
+          class="search-input"
+        >
+        <svg class="search-icon" viewBox="0 0 24 24">
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+      </div>
+
+      <!-- Category Filter -->
+      <select 
+        [(ngModel)]="selectedCategory" 
+        (change)="onCategoryChange()"
+        class="filter-select"
+      >
+        <option *ngFor="let category of categories" [value]="category.value">
+          {{ category.label }}
+        </option>
+      </select>
+
+      <!-- Technology Filter -->
+      <select 
+        [(ngModel)]="selectedTechnology" 
+        (change)="onTechnologyChange()"
+        class="filter-select"
+      >
+        <option *ngFor="let tech of technologies" [value]="tech.value">
+          {{ tech.label }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Results Count -->
+    <div class="results-info fade-in-up">
+      <span class="results-count">{{ filteredProjects.length }} project(s) found</span>
+    </div>
+  </div>
+</section>
+
+<!-- Projects Grid -->
+<section class="projects-section">
+  <div class="container">
+    <div class="projects-grid">
+      <div 
+        *ngFor="let project of filteredProjects; trackBy: trackByProjectId" 
+        class="project-card fade-in-up"
+        data-animate="slide-up"
+        (click)="openProject(project)"
+      >
+        <!-- Project Image -->
+        <div class="project-image">
+          <img [src]="project.image" [alt]="project.title" loading="lazy">
+          <div class="project-overlay">
+            <div class="project-actions">
+              <button 
+                *ngIf="project.liveUrl" 
+                class="action-btn primary"
+                (click)="openProject(project)"
+                title="View Live Demo"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </button>
+              <button 
+                *ngIf="project.githubUrl" 
+                class="action-btn secondary"
+                (click)="openGithub(project, $event)"
+                title="View Source Code"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Content -->
+        <div class="project-content">
+          <div class="project-header">
+            <h3 class="project-title">{{ project.title }}</h3>
+            <div class="project-meta">
+              <span 
+                class="status-badge" 
+                [style.background-color]="getStatusColor(project.status)"
+              >
+                {{ project.status }}
+              </span>
+              <!-- Only show priority if it exists -->
+              <span 
+                *ngIf="project.priority"
+                class="priority-badge"
+                [style.background-color]="getDifficultyColor(project.status)"
+              >
+                Priority {{ project.priority }}
+              </span>
+            </div>
+          </div>
+
+          <p class="project-description">{{ project.description }}</p>
+
+          <!-- Technologies -->
+          <div class="project-technologies">
+            <span 
+              *ngFor="let tech of project.technologies" 
+              class="tech-tag"
+            >
+              {{ tech }}
+            </span>
+          </div>
+
+          <!-- Project Highlights -->
+          <div *ngIf="project.highlights?.length" class="project-highlights">
+            <h4>Key Highlights:</h4>
+            <div class="highlights-grid">
+              <div *ngFor="let highlight of project.highlights" class="highlight-item">
+                <span class="highlight-icon">{{ highlight.icon }}</span>
+                <span class="highlight-label">{{ highlight.label }}:</span>
+                <span class="highlight-value">{{ highlight.value }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Results -->
+          <div *ngIf="project.results?.length" class="project-results">
+            <h4>Results:</h4>
+            <div class="results-grid">
+              <div *ngFor="let result of project.results" class="result-item">
+                <span class="result-label">{{ result.metric }}:</span>
+                <span class="result-value">{{ result.value }}</span>
+                <span *ngIf="result.description" class="result-description">{{ result.description }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Duration & Team -->
+          <div class="project-info">
+            <div *ngIf="project.duration" class="project-duration">
+              <svg class="duration-icon" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12,6 12,12 16,14"/>
+              </svg>
+              <span>{{ project.duration }}</span>
+            </div>
+            <div *ngIf="project.teamSize" class="project-team">
+              <svg class="team-icon" viewBox="0 0 24 24">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+              <span>Team of {{ project.teamSize }}</span>
+            </div>
+            <div *ngIf="project.role" class="project-role">
+              <svg class="role-icon" viewBox="0 0 24 24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+              <span>{{ project.role }}</span>
+            </div>
+          </div>
+
+          <!-- Project Tags -->
+          <div *ngIf="project.tags?.length" class="project-tags">
+            <span 
+              *ngFor="let tag of project.tags" 
+              class="tag"
+            >
+              {{ tag }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="filteredProjects.length === 0" class="empty-state fade-in-up">
+      <div class="empty-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+        </svg>
+      </div>
+      <h3>No Projects Found</h3>
+      <p>Try adjusting your search criteria or filters to find more projects.</p>
+      <button class="btn-primary" (click)="searchTerm = ''; selectedCategory = 'all'; selectedTechnology = 'all'; filterProjects()">
+        Clear Filters
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content fade-in-up">
+      <h2>Interested in Working Together?</h2>
+      <p>Let's discuss how I can contribute to your next project</p>
+      <div class="cta-buttons">
+        <a routerLink="/contact" class="btn-primary">Get In Touch</a>
+        <a href="mailto:jakkamsettimuralikrishna2000@gmail.com" class="btn-secondary">Send Email</a>
+      </div>
+    </div>
+  </div>
+</section>

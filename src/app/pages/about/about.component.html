@@ -1,0 +1,312 @@
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-content fade-in-up">
+      <div class="hero-image">
+        <div class="image-placeholder">
+          <svg viewBox="0 0 24 24" class="user-icon">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <div class="status-indicator">
+          <div class="status-dot"></div>
+          <span>Available for Work</span>
+        </div>
+      </div>
+      
+      <div class="hero-text">
+        <h1 class="hero-title">
+          About <span class="text-primary">Me</span>
+        </h1>
+        <h2 class="hero-subtitle">{{ personalInfo.currentPosition }}</h2>
+        <p class="hero-description">
+          Passionate software developer with {{ personalInfo.yearsOfExperience }}+ years of experience 
+          in creating innovative web applications and IoT solutions. I specialize in Java, Spring Boot, 
+          and Python technologies, with a strong focus on delivering scalable and efficient solutions.
+        </p>
+        
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">{{ personalInfo.yearsOfExperience }}+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">{{ experience.length }}</span>
+            <span class="stat-label">Professional Roles</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">{{ skills.length }}+</span>
+            <span class="stat-label">Technical Skills</span>
+          </div>
+        </div>
+        
+        <div class="hero-actions">
+          <button class="btn-primary" (click)="downloadResume()">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7,10 12,15 17,10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download Resume
+          </button>
+          <a routerLink="/contact" class="btn-secondary">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Personal Story Section -->
+<section class="story-section">
+  <div class="container">
+    <div class="story-content fade-in-up">
+      <div class="section-header">
+        <h2>My Journey</h2>
+        <p>From electronics engineering student to software developer</p>
+      </div>
+      
+      <div class="story-grid">
+        <div class="story-text">
+          <p>
+            My journey began during my B.Tech in Electronics and Communication Engineering, 
+            where I discovered my passion for technology and problem-solving. What started 
+            as curiosity about how things work evolved into a deep love for creating digital solutions.
+          </p>
+          <p>
+            During my studies, I dove into programming, starting with Java and gradually 
+            expanding to web technologies and IoT development. My final year project on 
+            forest fire detection using IoT opened my eyes to the potential of combining 
+            hardware and software to solve real-world problems.
+          </p>
+          <p>
+            Today, as a Software Developer at Samtex Solutions, I work on cutting-edge 
+            web applications and IoT monitoring systems. I'm passionate about creating 
+            efficient, scalable solutions that make a difference in people's lives.
+          </p>
+        </div>
+        
+        <div class="story-highlights">
+          <div class="highlight-card" *ngFor="let strength of strengths">
+            <div class="highlight-icon">{{ strength.icon }}</div>
+            <h3>{{ strength.title }}</h3>
+            <p>{{ strength.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience Timeline -->
+<section class="experience-section">
+  <div class="container">
+    <div class="section-header fade-in-up">
+      <h2>Professional Experience</h2>
+      <p>My career journey and key achievements</p>
+    </div>
+    
+    <div class="timeline">
+      <div 
+        *ngFor="let exp of experience; let i = index" 
+        class="timeline-item fade-in-up"
+        [attr.data-delay]="i * 100"
+      >
+        <div class="timeline-marker">
+          <div class="timeline-dot" [class.work]="exp.type === 'work'" [class.internship]="exp.type === 'internship'"></div>
+        </div>
+        
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <div class="timeline-meta">
+              <span class="timeline-type" [class.work]="exp.type === 'work'" [class.internship]="exp.type === 'internship'">
+                {{ exp.type === 'work' ? 'Work' : 'Internship' }}
+              </span>
+              <span class="timeline-duration">{{ exp.duration }}</span>
+            </div>
+            <h3 class="timeline-title">{{ exp.position }}</h3>
+            <h4 class="timeline-company">{{ exp.company }} • {{ exp.location }}</h4>
+          </div>
+          
+          <p class="timeline-description">{{ exp.description }}</p>
+          
+          <div class="timeline-details">
+            <div class="responsibilities">
+              <h5>Key Responsibilities:</h5>
+              <ul>
+                <li *ngFor="let responsibility of exp.responsibilities">{{ responsibility }}</li>
+              </ul>
+            </div>
+            
+            <div class="technologies">
+              <h5>Technologies Used:</h5>
+              <div class="tech-tags">
+                <span *ngFor="let tech of exp.technologies" class="tech-tag">{{ tech }}</span>
+              </div>
+            </div>
+            
+            <div *ngIf="exp.achievements" class="achievements">
+              <h5>Key Achievements:</h5>
+              <ul>
+                <li *ngFor="let achievement of exp.achievements">{{ achievement }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education Section -->
+<section class="education-section">
+  <div class="container">
+    <div class="section-header fade-in-up">
+      <h2>Education</h2>
+      <p>My academic background and achievements</p>
+    </div>
+    
+    <div class="education-grid">
+      <div 
+        *ngFor="let edu of education; let i = index" 
+        class="education-card fade-in-up"
+        [attr.data-delay]="i * 100"
+      >
+        <div class="education-header">
+          <div class="education-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+          </div>
+          <div class="education-meta">
+            <h3 class="education-degree">{{ edu.degree }}</h3>
+            <h4 class="education-institution">{{ edu.institution }}</h4>
+            <div class="education-details">
+              <span class="education-location">{{ edu.location }}</span>
+              <span class="education-duration">{{ edu.duration }}</span>
+            </div>
+          </div>
+          <div class="education-gpa">
+            <span class="gpa-label">GPA</span>
+            <span class="gpa-value">{{ edu.gpa }}</span>
+          </div>
+        </div>
+        
+        <p class="education-description">{{ edu.description }}</p>
+        
+        <div *ngIf="edu.achievements" class="education-achievements">
+          <h5>Key Achievements:</h5>
+          <ul>
+            <li *ngFor="let achievement of edu.achievements">{{ achievement }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills Section -->
+<section class="skills-section">
+  <div class="container">
+    <div class="section-header fade-in-up">
+      <h2>Technical Skills</h2>
+      <p>My expertise across different technologies and domains</p>
+    </div>
+    
+    <div class="skills-grid">
+      <div 
+        *ngFor="let category of getUniqueCategories()" 
+        class="skill-category fade-in-up"
+      >
+        <h3 class="category-title">{{ category }}</h3>
+        <div class="skills-list">
+          <div 
+            *ngFor="let skill of getSkillsByCategory(category)" 
+            class="skill-item"
+          >
+            <div class="skill-header">
+              <span class="skill-name">{{ skill.name }}</span>
+              <span class="skill-experience">{{ skill.yearsOfExperience }}y</span>
+            </div>
+            <div class="skill-bar">
+              <div 
+                class="skill-progress" 
+                [style.width.%]="skill.level"
+                [attr.data-level]="skill.level"
+              ></div>
+            </div>
+            <span class="skill-level">{{ skill.level }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Interests Section -->
+<section class="interests-section">
+  <div class="container">
+    <div class="section-header fade-in-up">
+      <h2>Interests & Passions</h2>
+      <p>What drives my curiosity and continuous learning</p>
+    </div>
+    
+    <div class="interests-grid fade-in-up">
+      <div *ngFor="let interest of interests" class="interest-card">
+        <span class="interest-name">{{ interest }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact CTA -->
+<section class="contact-cta-section">
+  <div class="container">
+    <div class="cta-content fade-in-up">
+      <h2>Let's Work Together</h2>
+      <p>
+        I'm always interested in new opportunities and exciting projects. 
+        Let's discuss how I can contribute to your team's success.
+      </p>
+      
+      <div class="contact-methods">
+        <button class="contact-btn" (click)="sendEmail()">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          {{ personalInfo.email }}
+        </button>
+        
+        <button class="contact-btn" (click)="callPhone()">
+          <svg viewBox="0 0 24 24">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          {{ personalInfo.phone }}
+        </button>
+        
+        <button class="contact-btn" (click)="openSocialLink(personalInfo.github)">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          GitHub
+        </button>
+        
+        <button class="contact-btn" (click)="openSocialLink(personalInfo.linkedin)">
+          <svg viewBox="0 0 24 24">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+          LinkedIn
+        </button>
+      </div>
+      
+      <div class="cta-actions">
+        <a routerLink="/contact" class="btn-primary">Contact Me</a>
+        <button class="btn-secondary" (click)="downloadResume()">Download Resume</button>
+      </div>
+    </div>
+  </div>
+</section>
