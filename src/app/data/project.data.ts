@@ -93,7 +93,7 @@ export const PROJECTS_DATA: Project[] = [
     longDescription: 'A comprehensive digital library solution built using Java Enterprise technologies. The system features role-based access control, advanced search capabilities, inventory management, and secure payment integration. Designed to modernize traditional library operations and provide seamless user experience for both administrators and customers.',
     category: 'web-development',
     technologies: ['Java', 'Servlets', 'JSP', 'JDBC', 'MySQL', 'HTML5', 'CSS3', 'JavaScript', 'Bootstrap'],
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop',
+    image: ' ',
     images: [
       ''
     ],

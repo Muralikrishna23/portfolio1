@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       title: 'ELibrary Management System',
       category: 'Web Development',
       description: 'Full-stack library management platform with admin controls for inventory and customer interface for book browsing and purchasing.',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+      image: ' ',
       technologies: ['Java', 'Spring Boot', 'Angular', 'MySQL'],
       status: 'completed',
       highlights: [

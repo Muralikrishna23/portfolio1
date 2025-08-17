@@ -205,7 +205,7 @@
              [style.animation-delay]="(i * 0.2) + 's'">
           <div class="project-image">
             <img [src]="project.image" [alt]="project.title" loading="lazy">
-            <div class="project-overlay">
+            <div class="">
               <div class="project-category">{{ project.category }}</div>
               <div class="project-tech">
                 <span *ngFor="let tech of project.technologies">{{ tech }}</span>
